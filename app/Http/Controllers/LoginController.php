@@ -71,8 +71,8 @@ class LoginController extends Controller
         $body = "Kami Menerima Laporan Bahwa Email " . $request->input('email') . " Lupa Kata Sandi";
 
         Mail::send('email',['action_link'=>$action_link, 'body'=>$body], function($messege) use ($request) {
-            $messege->from('AbdataAccounting@abdataccounting.com', 'Abdata Accounting');
-            $messege->to($request->input('email'), 'aku')
+            $messege->from('admin@abdataccounting.com', 'Abdata Accounting');
+            $messege->to($request->input('email'))
                     ->subject('reset Password');
         });
 
