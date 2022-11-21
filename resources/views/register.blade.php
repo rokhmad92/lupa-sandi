@@ -1,26 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>register</title>
-</head>
-<body>
-    <form method="post">
+@extends('partview.main')
+
+@section('content')    
+    <form method="post" id="register_from">
         @csrf
         <label for="email">email</label>
         <input type="email" name="email" id="email">
+        <div class="fail-message"></div>
 <br>
         <label for="username">username</label>
         <input type="text" name="username" id="username">
+        <div class="fail-message"></div>
 <br>
         <label for="password">password</label>
         <input type="password" name="password" id="password">
+        <div class="fail-message"></div>
 <br>
         <a href="/">Login</a>
 <br>
-        <button type="submit">register!</button>
+        <input type="submit" value="Register" class="btn btn-primary" id="register_btn">
     </form>
-</body>
-</html>
+@endsection
+
+@section('script')
+<script src="{{ asset('js') }}/register.js"></script>
+<script>
+        $(document).ready(function() {
+                $("#register_from").submit(function(e){
+                        e.preventDefault();
+                        $("#register_btn").val("Please Wait...");
+                        $.ajax({
+                                url: '/register',
+                                method: 'POST',
+                                data: $(this).serialize(),
+                                dataType: 'json',
+                                success: function(response) {
+                                        console.log(response);
+                                }
+                        })
+                });
+        });
+</script>
+@endsection

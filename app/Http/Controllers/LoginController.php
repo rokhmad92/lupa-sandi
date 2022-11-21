@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,10 +13,11 @@ use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
-    public function index(): Response
+    public function index()
     {
-        return response()
-            ->view('login');
+        return view('login', [
+            'title' => 'Login'
+        ]);
     }
 
     public function login(Request $request)
@@ -34,10 +34,11 @@ class LoginController extends Controller
         }
     }
 
-    public function registerView(): Response
+    public function registerView()
     {
-        return response()
-            ->view('register');
+        return view('register', [
+            'title' => 'Register'
+        ]);
     }
 
     public function store(Request $request)
@@ -48,13 +49,14 @@ class LoginController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return redirect('/');
+        return back();
     }
 
-    public function forgotView(): Response
+    public function forgotView()
     {
-        return response()
-            ->view('forgot');
+        return view('forgot', [
+            'title' => 'Lupa sandi'
+        ]);
     }
 
     public function sendEmail(Request $request)

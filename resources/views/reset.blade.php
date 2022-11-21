@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>password Baru</title>
-</head>
+@extends('partview.main')
+
+@section('content')
 @error('password')
     <p>{{ $message }}</p>
 @enderror
@@ -18,8 +13,7 @@
 @error('email')
     <p>{{ $message }}</p>
 @enderror
-<body>
-    <form action="/forgot/reset" method="get">
+<form action="/forgot/reset" method="get">
         @csrf
         <input type="hidden" name="token" value="{{ $token }}">
         <input type="hidden" name="email" value="{{ $email }}">
@@ -31,5 +25,4 @@
 <br>
         <button type="submit">reset Password!</button>
     </form>
-</body>
-</html>
+@endsection
