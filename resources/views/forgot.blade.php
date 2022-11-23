@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>lupa password</title>
 </head>
+
 <body>
     <form method="post">
         @csrf
