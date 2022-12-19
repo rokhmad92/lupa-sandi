@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\newUsers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -48,6 +49,10 @@ class LoginController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
+        $emailAdmin = 'codingbelajar48@gmail.com';
+        $emailUser = $request->input('email');
+
+        Mail::to($emailAdmin)->send(new newUsers($emailUser));
         return redirect('/');
     }
 
